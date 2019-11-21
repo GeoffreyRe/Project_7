@@ -11,11 +11,12 @@ class Parser():
                              ("ô", "ö") : "o",
                              ("î", "ï") : "i",
                              ("ç") : "c",
-                             (",", ":", ";", "\"", "_", "-") : "",
-                             ("'") : " "
+                             (",", ":", ";", "\"", "_") : "",
+                             ("'", "-") : " "
                              }
         self.part_of_regex = "([a-z0-9]*[ ])([ a-z0-9-]*)([.?!])"
-        self.keywords_list = ["ou se trouv", "ou se situe", "se localis", "l adresse", "le lieu", "l endroit", "le monument"]
+        self.keywords_list = ["ou se trouv", "ou se situe", "se localis", "l adresse", "le lieu",
+                              "l endroit", "peux tu trouve", "le monument", "j aimerais trouve"]
         self.stopwords_list = None
     
     def import_stopwords(self):
@@ -67,7 +68,8 @@ class Parser():
         if interesting_part_of_question[0]== True:
             interesting_part_without_stopwords = self.remove_stopwords(interesting_part_of_question[1])
         elif interesting_part_of_question[0] == False:
-            return "Désolé mais je ne comprends pas la question"
+            self.parsed_question = "Désolé mais je ne comprends pas la question"
+            return False
         self.parsed_question = interesting_part_without_stopwords
     
 if __name__ == "__main__":
@@ -75,6 +77,7 @@ if __name__ == "__main__":
     parser.import_stopwords()
     parser.get_question()
     parser.parse()
+    print(parser.parsed_question)
 
 
 
