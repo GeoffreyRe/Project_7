@@ -1,7 +1,7 @@
-import app.utils.Parser as app.Parser, pytest
+import app.utils.Parser as Parser, pytest
 
 def test_class_Parser_exists():
-    assert hasattr(app.Parser, "Parser")
+    assert hasattr(Parser, "Parser")
 
 @pytest.mark.parametrize("user_question", [
     "Bonjour GrandPy, j'espère que tu vas bien, sais-tu où se trouve la tour eiffel?",
@@ -14,7 +14,7 @@ def test_get_question_method_add_value_to_question_to_analyse_attribute(user_que
     def mock_input(string=None):
         return user_question
     
-    parser = app.Parser.Parser()
+    parser = Parser.Parser()
     monkeypatch.setattr("builtins.input", mock_input)
     parser.get_question()
 
@@ -29,13 +29,13 @@ def test_lower_question_is_ok(user_question):
     """
     à demander: savoir si il faut mocker la fonction lower ou pas
     """
-    parser = app.Parser.Parser()
+    parser = Parser.Parser()
     parser.question_to_analyse = user_question
     question_lowed = parser.lower_user_question()
     assert  question_lowed == "bonjour grandpy, j'espère que tu vas bien ! connais-tu le lieu suivant : place de la bastille ? bien à toi."
 
 def test_method_eliminate_accents_of_questions_does_the_job():
-    parser = app.Parser.Parser()
+    parser = Parser.Parser()
     question = "été soleil ça où été être cela île àâä ùüû ôö îï,,:;\""
     assert parser.eliminate_accents_of_question(question) == "ete soleil ca ou ete etre cela ile aaa uuu oo ii"
 
@@ -52,7 +52,7 @@ def test_stopwords_list_attribute_is_assigned_well_to_attribute(monkeypatch):
             pass
     def mock_json_load(file):
         return stopwords
-    parser = app.Parser.Parser()
+    parser = Parser.Parser()
     monkeypatch.setattr("builtins.open", MockOpen)
     monkeypatch.setattr("json.load", mock_json_load)
     parser.import_stopwords()
@@ -67,14 +67,14 @@ def test_stopwords_list_attribute_is_assigned_well_to_attribute(monkeypatch):
 ])
 
 def test_find_place_in_questions_find_good__part_of_sentence(question):
-    parser = app.Parser.Parser()
+    parser = Parser.Parser()
     good_part_of_question = parser.find_place_in_question(question[0])
     print(good_part_of_question)
     assert good_part_of_question[1] == question[1]
     
 
 def test_remove_stopwords_removes_well_given_stopwords_of_a_sentence():
-    parser = app.Parser.Parser()
+    parser = Parser.Parser()
     parser.stopwords_list = ["à", "ah", "bon", "salut", "ça", "va", "et", "de", "en"]
     parsed_sentence = parser.remove_stopwords("salut GrandPy, comment ça va aujourd'hui ? ah j'ai oublié de te dire que je vais aller en France.")
     assert parsed_sentence == "GrandPy, comment aujourd'hui ? j'ai oublié te dire que je vais aller France."
@@ -90,12 +90,11 @@ def test_remove_stopwords_removes_well_given_stopwords_of_a_sentence():
 def test__method_parse_assign_expected_value_to_parsed_question_attribute(question, monkeypatch):
     def mock_import_stopwords(self):
         self.stopwords_list = ["a", "un", "une", "as", "des", "le", "la", "d", "et", "de", "s","il","te","plait"]
-    monkeypatch.setattr("app.Parser.Parser.import_stopwords", mock_import_stopwords)
-    parser = app.Parser.Parser()
+    monkeypatch.setattr("app.utils.Parser.Parser.import_stopwords", mock_import_stopwords)
+    parser = Parser.Parser()
     parser.import_stopwords()
     parser.question_to_analyse = question[0]
     parser.parse()
-    print(parser.parsed_question)
     assert parser.parsed_question == question[1]
     
 
