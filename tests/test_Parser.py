@@ -1,4 +1,4 @@
-import app.Parser, pytest
+import app.utils.Parser as app.Parser, pytest
 
 def test_class_Parser_exists():
     assert hasattr(app.Parser, "Parser")

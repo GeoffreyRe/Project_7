@@ -20,7 +20,7 @@ class Parser():
         self.stopwords_list = None
     
     def import_stopwords(self):
-        with open("stopwords.json") as f:
+        with open("../static/stopwords.json") as f:
             self.stopwords_list = json.load(f)
 
 
