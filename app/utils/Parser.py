@@ -15,7 +15,7 @@ class Parser():
                              ("'", "-") : " "
                              }
         self.part_of_regex = "([a-z0-9]*[ ])([ a-z0-9-]*)([.?!])"
-        self.keywords_list = ["ou se trouv", "ou se situe", "se localis", "l adresse", "le lieu",
+        self.keywords_list = ["connais tu", "ou se trouv", "ou se situe", "se localis", "l adresse", "le lieu",
                               "l endroit", "peux tu trouve", "le monument", "j aimerais trouve"]
         self.stopwords_list = None
     

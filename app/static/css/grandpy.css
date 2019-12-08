@@ -1,0 +1,49 @@
+html, body
+{
+    width:100%;
+    height:100%;
+    font-family: 'Times New Roman', Times, serif;
+}
+.chat
+{
+    width:50%;
+    height:80%;
+    border:solid 3px black;
+    margin:5px auto;
+    overflow-y:scroll;
+    scrollbar-width: thin;
+}
+form
+{
+  display:flex;
+  width:50%;
+  margin:5px auto;
+}
+textarea
+{
+  display:block;
+  width:84%;
+}
+input
+{
+  display:block;
+  width:15%;
+  min-width:10%;
+  margin-left:1%;
+}
+.user
+{
+  border:solid 1px red;
+  clear:both;
+  float:right;
+  margin:2%;
+  padding:2%;
+}
+.robot
+{
+  border:solid blue 1px;
+  float:left;
+  clear:both;
+  margin :2%;
+  padding:1%;
+}
