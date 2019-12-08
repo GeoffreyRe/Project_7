@@ -5,7 +5,7 @@ class ApiUser():
         self.HTTP_BASE_REQUEST_API_HERE_IMAGE = "https://image.maps.api.here.com/mia/1.6/mapview?"
         self.HTTP_BASE_REQUEST_API_WIKIPEDIA = "https://fr.wikipedia.org/w/api.php?"
         self.place_to_find = None
-        self.app_id, self.app_code = "hAwtcHZDT2E4LNBNo3Ju", "5R3EaOfVBeF8BB-BCnBvvg"
+        self.app_id, self.app_code = "", ""
         self.wiki_id, self.wiki_infos = None, None
         self.lon, self.lat = None, None
         self.binary_image = None
