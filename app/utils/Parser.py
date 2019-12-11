@@ -1,40 +1,65 @@
+"""
+This module contains Parser class
+"""
 import re
 import json
 class Parser():
+    """
+    This class has the responsibility to parse the user question
+    """
     def __init__(self):
-        self.question_to_analyse = None # this value will get a value when "get_question" method will be called
+        """
+        This method create instance attributes
+        """
+        self.question_to_analyse = None
         self.parsed_question = None
-        self.ACCENTS_DICT = {
-                             ("à" ,"â","ä") : "a",
+        self.ACCENTS_DICT = {("à", "â", "ä") : "a",
                              ("ù", "ü", "û") : "u",
-                             ("é", "è", "ë","ê"): "e",
+                             ("é", "è", "ë", "ê"): "e",
                              ("ô", "ö") : "o",
                              ("î", "ï") : "i",
                              ("ç") : "c",
                              (",", ":", ";", "\"", "_") : "",
-                             ("'", "-") : " "
-                             }
+                             ("'", "-") : " "}
         self.part_of_regex = "([a-z0-9]*[ ])([ a-z0-9-]*)([.?!])"
-        self.keywords_list = ["connais tu", "ou se trouv", "ou se situe", "se localis", "l adresse", "le lieu",
-                              "l endroit", "peux tu trouve", "le monument", "j aimerais trouve"]
+        self.keywords_list = ["connais tu", "ou se trouv", "ou se situe", "se localis",
+                              "l adresse", "le lieu", "l endroit", "peux tu trouve",
+                              "le monument", "j aimerais trouve"]
         self.stopwords_list = None
-    
+        self.success = False
+
     def import_stopwords(self):
-        with open("../static/stopwords.json") as f:
-            self.stopwords_list = json.load(f)
+        """
+        This method import json stopwords
+        """
+        with open("app/static/stopwords.json") as file:
+            self.stopwords_list = json.load(file)
 
 
-    def get_question(self):
+    def get_question(self, question):
         """
-        ask to user a question
+        This method assign value to question_to_analyse
         """
-        question = input("Posez votre question à grandPy: ")
         self.question_to_analyse = question + "."
 
+    def initialize_parser(self, question):
+        """
+        This method import stopword and initialize attribute
+        """
+        self.import_stopwords()
+        self.get_question(question)
+
     def lower_user_question(self):
+        """
+        This method lower user question
+        """
         return self.question_to_analyse.lower()
-        
+
     def eliminate_accents_of_question(self, question):
+        """
+        This method check if there are accents into the question
+        and change accents letters into non-accent letters
+        """
         question = list(question)
         for index, letter in enumerate(question):
             for key in self.ACCENTS_DICT.keys():
@@ -42,8 +67,11 @@ class Parser():
                     question[index] = self.ACCENTS_DICT[key]
         question_without_accents = "".join(question)
         return question_without_accents
-    
+
     def find_place_in_question(self, question):
+        """
+        Try to find place to question thanks to a regex
+        """
         for keyword in self.keywords_list:
             regex = keyword + self.part_of_regex
             re_answer = re.search(regex, question)
@@ -52,6 +80,9 @@ class Parser():
         return (False, "")
 
     def remove_stopwords(self, sentence):
+        """
+        The method removes stopwords from the question
+        """
         words_list = sentence.split(" ")
         for index, word in enumerate(words_list):
             for stopword in self.stopwords_list:
@@ -60,28 +91,17 @@ class Parser():
         words_list = [word for word in words_list if word != ""]
         return " ".join(words_list)
 
-    
+
     def parse(self):
+        """
+        This method trait the question completely
+        """
         question_lowed = self.lower_user_question()
         question_no_accent = self.eliminate_accents_of_question(question_lowed)
         interesting_part_of_question = self.find_place_in_question(question_no_accent)
-        if interesting_part_of_question[0]== True:
+        if interesting_part_of_question[0]:
             interesting_part_without_stopwords = self.remove_stopwords(interesting_part_of_question[1])
-        elif interesting_part_of_question[0] == False:
-            self.parsed_question = "Désolé mais je ne comprends pas la question"
+        elif not interesting_part_of_question[0]:
             return False
         self.parsed_question = interesting_part_without_stopwords
-    
-if __name__ == "__main__":
-    parser = Parser()
-    parser.import_stopwords()
-    parser.get_question()
-    parser.parse()
-    print(parser.parsed_question)
-
-
-
-
-
-
-    
+        return True

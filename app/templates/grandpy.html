@@ -4,17 +4,48 @@
         <title>GrandPy bot - le papy robot qui vous raconte des histoires !</title>
         <meta charset="utf-8">
         <link rel="stylesheet" type="text/css" href="../static/css/grandpy.css">
+        <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js" type="text/javascript" charset="utf-8"></script>
+        <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js" type="text/javascript" charset="utf-8"></script>
+        <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
     </head>
     <body>
+        <header>
+            <div class = "titre_principal">
+                <div class="h1_and_img">
+                <img src="../static/images/robot_tran.png">
+                <h1>GrandPyBot</h1>
+                </div>
+                <h2>Le papy robot qui vous raconte des histoires sur tous les lieux du monde !</h2>
+            </div>
+            <!--<hr> -->
+        </header>
+        <div class="outer_chat">
         <div class="chat">
-            <p class="user"> Salut GrandPy connais-tu le chemin de la rivière? Merci !</p>
-            <p class="robot"> Bonjour mon ptit, oui je le connais voilà ce que j'ai trouvé <br> Salut</p>
-
+            <p class="robot"> Salut ! Je suis le papy robot mais tu peux m'appeler GrandPyBot.
+            Si tu cherches un lieu et des infos croustillantes sur cet endroit, tu as frappé à la bonne porte.
+            Tu peux poser ta question dans l'encadré ci-dessous et je te répondrai avec plaisir !</p>
         </div>
+        </div>
+
         <form action="" method="get">
         <textarea placeholder="Posez votre question à GrandPy ici !" name="question" rows="2"></textarea>
         <input type="submit" value="Envoyer">
         </form>
+
+        <footer>
+            <div class="reseaux">
+                <nav class="menu_reseaux">
+                    <ul>
+                        <li><a href="https://github.com/GeoffreyRe/Project_7" target="_blank"><img src="../static/images/github_tran2.png"></a></li>
+                        <li><a href="https://openclassrooms.com/fr/paths/68-developpeur-dapplication-python" target="_blank"><img src="../static/images/OC_tran2.png"></a></li>
+                        <li><a href="https://fr-fr.facebook.com/geoffrey.remacle" target="_blank"><img src="../static/images/face_tran2.png"></a></li>
+                        <li><a href="https://be.linkedin.com/in/geoffrey-remacle-352889173" target="_blank"><img src="../static/images/lin_tran2.png""></a></li>
+                    </ul>
+                </nav>
+                <p class="developer">- Geoffrey Remacle -</p>
+            </div>
+        </footer>
+
         <script src="../static/js/ajax.js"></script>
         <script src="../static/js/grandpy.js"></script>
     </body>
