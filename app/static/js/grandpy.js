@@ -1,7 +1,7 @@
 let chatELT = document.getElementsByClassName("chat")[0];
 
 let platform = new H.service.Platform({
-    'apikey': ''
+    'apikey': 's-GCuUP2fbtkdhIHysMqbFTtnZ4EGa3a09Bj7OWDhc8'
   });
 
 let defaultLayers = platform.createDefaultLayers();

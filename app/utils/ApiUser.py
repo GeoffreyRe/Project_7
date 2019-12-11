@@ -2,6 +2,7 @@
 This module contains ApiUser class
 """
 import requests
+import os
 class ApiUser():
     """
     This class has the responsibility of retrieve informations from api
@@ -11,7 +12,7 @@ class ApiUser():
                                                      "places/v1/discover/search?")
         self.HTTP_BASE_REQUEST_API_WIKIPEDIA = "https://fr.wikipedia.org/w/api.php?"
         self.place_to_find = None
-        self.app_id, self.app_code = "", ""
+        self.app_id, self.app_code = None, None
         self.wiki_id, self.wiki_infos = None, None
         self.lon, self.lat = None, None
         self.request_success = False
@@ -21,6 +22,8 @@ class ApiUser():
         """
         This method assigns value to place to find attribute
         """
+        self.app_id = os.environ.get("HERE_ID")
+        self.app_code = os.environ.get("HERE_CODE")
         self.place_to_find = place
 
     def clear_attributes(self):
