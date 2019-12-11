@@ -37,7 +37,7 @@ formELT.addEventListener("submit", function(e) {
     let inputValue = formELT.elements[0].value
     e.preventDefault();
     addResponseToChat(inputValue.replace("\n", "<br>"), "user")
-    ajaxPost("/answer", inputValue , function (rep) {
+    ajaxPost("/answer", inputValue.replace("\n", " ") , function (rep) {
         console.log(rep)
         console.log(typeof rep.api_infos)
         if (rep.parsed === true) {
@@ -57,10 +57,6 @@ formELT.addEventListener("submit", function(e) {
             addResponseToChat("Je n'ai pas compris ta question. Pourrais-tu donner des informations"+
                               " plus précises sur le lieu que tu cherches s'il te plaît ? Attention, l'orthographe compte.", "robot")
         }
-        /*
-        addResponseToChat(rep.sentence.replace("\n", "<br>"), "robot")
-        addImageApiToChat()
-        */
     })
     formELT.elements[0].value = ""
 })
