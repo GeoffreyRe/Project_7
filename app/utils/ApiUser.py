@@ -15,6 +15,7 @@ class ApiUser():
         self.app_id, self.app_code = None, None
         self.wiki_id, self.wiki_infos = None, None
         self.lon, self.lat = None, None
+        self.address = None
         self.request_success = False
         self.find_infos_success = False
 
@@ -33,6 +34,7 @@ class ApiUser():
         self.place_to_find = None
         self.wiki_id, self.wiki_infos = None, None
         self.lon, self.lat = None, None
+        self.address = None
         self.find_infos_success, self.request_success = False, False
 
     def construct_http_request(self, find_geocoords=False, find_wiki_infos=False, get_wiki_id=False):
@@ -89,6 +91,7 @@ class ApiUser():
             json_response = response.json()
             if param_dict["find_geocoords"]:
                 self.lon, self.lat = json_response["results"]["items"][0]["position"]
+                self.address = json_response["results"]["items"][0]["vicinity"]
             elif param_dict["get_wiki_id"]:
                 self.wiki_id = json_response["query"]["geosearch"][0]["pageid"]
             elif param_dict["find_wiki_infos"]:
@@ -132,6 +135,7 @@ class ApiUser():
         self.find_all_informations()
         status = self.find_infos_success and self.request_success
         informations = {"status" : status,
+                        "address" : self.address,
                         "wiki" : self.wiki_infos,
                         "longitude" : self.lon,
                         "latitude" : self.lat}

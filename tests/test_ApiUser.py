@@ -120,6 +120,7 @@ def test_give_informations_method(monkeypatch):
     wiki_informations = "informations"
     longitude = 25
     latitude = 15
+    address = "rue test"
 
     def mock_find_all_informations(self):
         api_user.wiki_infos = wiki_informations
@@ -127,8 +128,10 @@ def test_give_informations_method(monkeypatch):
         api_user.lat = latitude
         api_user.find_infos_success = True
         api_user.request_success = True
+        api_user.address = address
+
     monkeypatch.setattr("app.utils.ApiUser.ApiUser.find_all_informations",
                         mock_find_all_informations)
-    infos = {"status" : True, "wiki" : wiki_informations, "longitude" : longitude,
+    infos = {"status" : True,"address":address , "wiki" : wiki_informations, "longitude" : longitude,
              "latitude" : latitude}
     assert api_user.give_informations("Belgium") == infos

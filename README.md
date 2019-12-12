@@ -47,6 +47,11 @@ version de python lors du développement : 3.8
 Vous pouvez retrouver l'ensemble des librairies utilisées pour ce projet dans le
 fichier requirements.txt et tout installer directement via ce fichier grâce à une
 commande pip.
+
+## 2.3 Utilisation des clefs d'API
+----------------------------------
+Pour des raisons de sécurité, les clefs de l'API HERE doivent être stockées dans des
+variables d'environnement appelé "HERE_ID" et "HERE_CODE". 
   
 # 3 Structure du projet
 -------------------------
@@ -59,6 +64,7 @@ Le projet est subdivisé de la façon suivante:
 - fichier "grandpy.py" : fichier contenant le point de départ de l'application
 - fichier "README.md" : ce fichier
 - fichier "requirements.txt" : contient les différentes librairies utilisées par le projet
+- fichier "Procfile" : Ce fichier est nécessaire lors du lancement du serveur.
 Analysons maintenant le dossier "app"
 
 ## 3.1 Dossier "app"
@@ -116,6 +122,11 @@ lien vers la documentation : https://www.mediawiki.org/wiki/API:Main_page/fr
 ## 4.3. Langue du code
 -----------------------
 les noms de classes, fonctions, variables, les commentaires, les docstrings,... sont écrits en anglais.
+
+## 4.4 Déploiement
+------------------
+L'application est déployé avec Heroku
+vous pouvez retrouvé l'application à cette adresse : https://geoffrey-remacle-grandpybot.herokuapp.com/
 
 ## 4.4. Liens
 --------------

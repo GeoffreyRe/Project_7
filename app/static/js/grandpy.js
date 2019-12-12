@@ -38,11 +38,12 @@ formELT.addEventListener("submit", function(e) {
     e.preventDefault();
     addResponseToChat(inputValue.replace("\n", "<br>"), "user")
     ajaxPost("/answer", inputValue.replace("\n", " ") , function (rep) {
-        console.log(rep)
-        console.log(typeof rep.api_infos)
         if (rep.parsed === true) {
             if (rep.api_infos.status === true) {
-                addResponseToChat("Ah ! je connais ce lieu. D'ailleurs, j'ai retrouvé une carte de ses environs !", "robot")
+                console.log(rep.api_infos.address)
+                addResponseToChat("Ah ! je connais ce lieu. Il se situe à cet endroit " +
+                `: ${rep.api_infos.address.replace("<br/>", " ").replace("<br/>", " ")}. D'ailleurs,`+ 
+                "j'ai retrouvé une carte de ses environs !", "robot")
                 addImageApiToChat(rep.api_infos.latitude, rep.api_infos.longitude)
                 addResponseToChat("Ce lieu me rappelle des souvenirs, j'ai une anecdote"
                                   + ` sur cet endroit et ses alentours : ${rep.api_infos.wiki.title}`, "robot")
